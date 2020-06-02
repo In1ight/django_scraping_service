@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        {% for item in object_list %}
+            <div class="col-lg-12 mt-3">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>{{ forloop.counter }}. <a href="{{ item.url }}">{{ item.title }}</a></h5>
+                    </div>
+                    <div class="card-body">
+                        <h4>{{ item.company_name }}</h4>
+                        <p class="card-text">{{ item.description|truncatewords:35 }}</p>
+                        <p>{{ item.city.name }} | {{ item.language.name }} <br>
+                            <small>{{ item.timestamp|date:"d M" }}</small></p>
+                        <a href="{{ item.url }}" class="btn btn-primary">Посмотреть</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            {% if request.POST or request.GET %}
+                <h3 class="mx-auto">По вашему запросу ничего не найдено.</h3>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+
+            <form action="" method="get">
+                {{ form.as_p }}
+                <input type="submit" class="btn btn-primary">
+            </form>
+        </div>
+    </div>
+{% endblock %}
