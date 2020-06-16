@@ -9,7 +9,7 @@
                     </div>
                     <div class="card-body">
                         <h4>{{ item.company_name }}</h4>
-                        <p class="card-text">{{ item.description|truncatewords:35 }}</p>
+                        <p class="card-text">{{ item.description|truncatewords:35 }}  {% if item.requirement %}<br> <b>Требования:</b>   {{ item.requirement|truncatewords:35 }} {% endif %}</p>
                         <p>{{ item.city.name }} | {{ item.language.name }} <br>
                             <small>{{ item.timestamp|date:"d M" }}</small></p>
                         <a href="{{ item.url }}" class="btn btn-primary">Посмотреть</a>

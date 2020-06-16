@@ -1,6 +1,7 @@
 from django.db import models
 
 from .utils import from_cyrillic_to_eng
+import jsonfield
 
 
 class City(models.Model):
@@ -45,6 +46,7 @@ class Vacancy(models.Model):
     company_name = models.CharField(max_length=255, verbose_name='Компания')
     description = models.TextField(verbose_name='Описание')
     price = models.CharField(max_length=255, blank=True)
+    requirement = models.CharField(max_length=255, blank=True, null=True, verbose_name='Требования')
     city = models.ForeignKey('City', on_delete=models.CASCADE, verbose_name='Город')
     language = models.ForeignKey('LanguageProgramming', on_delete=models.CASCADE,
                                  verbose_name='Язык программирования')
@@ -60,4 +62,8 @@ class Vacancy(models.Model):
         verbose_name = 'Вакансия'
         verbose_name_plural = 'Вакансии'
     
+    
+class Error(models.Model):
+    timestamp = models.DateField(auto_now_add=True)
+    data = jsonfield.JSONField
     
